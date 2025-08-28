@@ -1,21 +1,20 @@
 const WebSocket = require("ws");
 const http = require("http");
 
-const PORT = process.env.PORT || 10000; // Render sets PORT automatically
-
+const PORT = process.env.PORT || 10000; // Render injects PORT automatically
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (ws) => {
-  console.log("Client connected");
+  console.log("✅ Client connected");
 
   ws.on("message", (msg) => {
-    console.log("Received:", msg.toString());
+    console.log("📩 Received:", msg.toString());
     ws.send(`Server received: ${msg}`);
   });
 
   ws.on("close", () => {
-    console.log("Client disconnected");
+    console.log("⚠️ Client disconnected");
   });
 });
 
